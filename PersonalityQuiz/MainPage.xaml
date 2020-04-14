@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:personalityQuiz="clr-namespace:PersonalityQuiz;assembly=PersonalityQuiz"
+             xmlns:swiper="clr-namespace:Swiper;assembly=PersonalityQuiz"
              mc:Ignorable="d"
              x:Class="PersonalityQuiz.MainPage">
 
@@ -20,7 +21,11 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <ContentView IsVisible="{Binding IsResult, Converter={StaticResource not}}">
+            <ContentView IsVisible="{Binding IsResult, Converter={StaticResource not}}" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                <ContentView.GestureRecognizers>
+                    <SwipeGestureRecognizer Direction="Right" Command="{Binding TrueCommand}"/>
+                    <SwipeGestureRecognizer Direction="Left" Command="{Binding FalseCommand}"/>
+                </ContentView.GestureRecognizers>
                 <StackLayout>
                     <Label Text="{Binding CurrentQuestionModel.QText}" FontSize="Large"></Label>
                     <Button Text="True" Command="{Binding TrueCommand}"/>

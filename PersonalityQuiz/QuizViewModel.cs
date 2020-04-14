@@ -18,6 +18,9 @@ namespace PersonalityQuiz
         public ICommand TrueCommand { get; }
         public ICommand FalseCommand { get; }
         public ICommand RestartCommand { get; }
+        public ICommand SwipeLeftCommand { get; }
+        public ICommand SwipeRightCommand { get; }
+
         public int QuestionID = 0;
         public QuestionModel CurrentQuestionModel => QuestionModel.All[QuestionID];
         public int CharacterID;
@@ -31,12 +34,14 @@ namespace PersonalityQuiz
             set => this._IsResult = value;
         }
 
-
+        
 
         public QuizViewModel()
         {
             TrueCommand = new Command(SubmitQuestionTrue);
             FalseCommand = new Command(SubmitQuestionFalse);
+            SwipeLeftCommand = new Command(SubmitQuestionFalse);
+            SwipeRightCommand = new Command(SubmitQuestionTrue);
             RestartCommand = new Command(RestartApp);
         }
 
