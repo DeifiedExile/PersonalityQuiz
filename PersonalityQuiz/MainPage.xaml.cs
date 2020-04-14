@@ -15,26 +15,6 @@ namespace PersonalityQuiz
         {
             InitializeComponent();
         }
-        //int[] PersonalityProfile = new int[]{0,0,0,0};
-        //private int QuestionID = 0;
-        
-        
 
-        //public void GetResults()
-        //{
-            
-        //}
-
-        //private void Button_OnTrueClicked(object sender, EventArgs e)
-        //{
-        //    PersonalityProfile[QuestionModel.All[QuestionID].TraitUp]++;
-        //    PersonalityProfile[QuestionModel.All[QuestionID].TraitDown]--;
-
-        //}
-
-
-
-
-        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,37 +13,53 @@ namespace PersonalityQuiz
 {
     class QuizViewModel : INotifyPropertyChanged
     {
-        //public QuestionModel Question;
+
 
         public ICommand TrueCommand { get; }
         public ICommand FalseCommand { get; }
+        public ICommand RestartCommand { get; }
         public int QuestionID = 0;
         public QuestionModel CurrentQuestionModel => QuestionModel.All[QuestionID];
-        public int CharacterID = 4;
+        public int CharacterID;
         public CharacterModel Character => CharacterModel.All[CharacterID];
         public int[] PersonalityProfile = new int[] { 0, 0, 0, 0 };
-        //public bool isResult => Character != null;
+        public bool _IsResult = false;
 
-        public string ResultName => Character.Name;
-        public string ResultDescription => Character.Description;
-        public string ResultUrl => Character.ImageUrl;
+        public bool IsResult
+        {
+            get => this._IsResult;
+            set => this._IsResult = value;
+        }
+
+
 
         public QuizViewModel()
         {
             TrueCommand = new Command(SubmitQuestionTrue);
             FalseCommand = new Command(SubmitQuestionFalse);
+            RestartCommand = new Command(RestartApp);
         }
 
+        
         void SubmitQuestionTrue()
         {
-            PersonalityProfile[this.CurrentQuestionModel.TraitUp]++;
-            PersonalityProfile[this.CurrentQuestionModel.TraitDown]--;
-            if (QuestionID >= QuestionModel.All.Count)
+            this.PersonalityProfile[this.CurrentQuestionModel.TraitUp] += 1;
+            this.PersonalityProfile[this.CurrentQuestionModel.TraitDown] -= 1;
+            if (QuestionID >= QuestionModel.All.Count-1)
             {
+                int r = 0;
+                for(int i = 0; i < PersonalityProfile.Length; i++)
+                {
+                    if (PersonalityProfile[i] > r)
+                    {
+                        r = i;
+                    }
+                }
+                CharacterID = r;
+                IsResult = true;
                 
-                CharacterID = PersonalityProfile.IndexOf(PersonalityProfile.Max());
-                
-                OnCharacterIdChanged(nameof(Character));
+                OnCharacterIdChanged(nameof(CharacterID));
+                OnCharacterIdChanged(nameof(IsResult));
                 
             }
             else
@@ -50,18 +67,28 @@ namespace PersonalityQuiz
                 QuestionID++;
                 OnQuestionIdChanged(nameof(CurrentQuestionModel));
             }
+            
         }
 
         void SubmitQuestionFalse()
         {
             PersonalityProfile[this.CurrentQuestionModel.TraitUp]--;
             PersonalityProfile[this.CurrentQuestionModel.TraitDown]++;
-            if (QuestionID >= QuestionModel.All.Count)
+            if (QuestionID >= QuestionModel.All.Count-1)
             {
 
-                CharacterID = PersonalityProfile.IndexOf(PersonalityProfile.Max());
-                
+                int r = 0;
+                for (int i = 0; i < PersonalityProfile.Length; i++)
+                {
+                    if (PersonalityProfile[i] > r)
+                    {
+                        r = i;
+                    }
+                }
+                CharacterID = r;
+                IsResult = true;
                 OnCharacterIdChanged(nameof(Character));
+                OnCharacterIdChanged(nameof(IsResult));
 
             }
             else
@@ -72,7 +99,11 @@ namespace PersonalityQuiz
             
         }
 
-        
+        void RestartApp()
+        {
+            (Application.Current).MainPage = new MainPage();
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

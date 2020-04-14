@@ -7,35 +7,37 @@
              mc:Ignorable="d"
              x:Class="PersonalityQuiz.MainPage">
 
-    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <personalityQuiz:BoolConverter x:Key="not" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.BindingContext>
         <personalityQuiz:QuizViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <StackLayout>
-            <!--<BoxView>
-            
-            <BoxView.GestureRecognizers>
-                <SwipeGestureRecognizer Direction="Right" Swiped="SwipeRight"/>
-                <SwipeGestureRecognizer Direction="Left" Swiped="SwipeLeft"/>
-            </BoxView.GestureRecognizers>
-        </BoxView>-->
-            <Label Text="{Binding CurrentQuestionModel.QText}" FontSize="Large"></Label>
-            <Button Text="True" Command="{Binding TrueCommand}"/>
-            <Button Text="False" Command="{Binding FalseCommand}"/>
-
-            <ContentView IsVisible="{Binding isResult}">
+            <ContentView IsVisible="{Binding IsResult, Converter={StaticResource not}}">
+                <StackLayout>
+                    <Label Text="{Binding CurrentQuestionModel.QText}" FontSize="Large"></Label>
+                    <Button Text="True" Command="{Binding TrueCommand}"/>
+                    <Button Text="False" Command="{Binding FalseCommand}"/>
+                </StackLayout>
 
             </ContentView>
-
-            <Image  Source="{Binding ResultUrl}"></Image>
-            <Label Text="{Binding ResultName}"></Label>
-            <Label Text="{Binding ResultDescription}"></Label>
-
-            
-
+            <ContentView IsVisible="{Binding IsResult}">
+                <StackLayout>
+                    <Image  Source="{Binding Character.ImageUrl}"></Image>
+                    <Label Text="{Binding Character.Name}"></Label>
+                    <Label Text="{Binding Character.Description}"></Label>
+                    <Button Text="Restart" Command="{Binding RestartCommand}"/>
+                </StackLayout>
+            </ContentView>
         </StackLayout>
+
     </ContentPage.Content>
    
 
