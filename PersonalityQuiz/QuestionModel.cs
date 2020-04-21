@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows.Input;
-using Xamarin.Forms;
+﻿using System.Collections.Generic;
 
 namespace PersonalityQuiz
 {
@@ -14,12 +8,14 @@ namespace PersonalityQuiz
         public string QText { get; private set; }
         public int TraitUp { get; private set; }
         public int TraitDown { get; private set; }
-        
+        public bool State { get; set; }
+
         public QuestionModel(string qText, int traitUp, int traitDown)
         {
             QText = qText;
             TraitUp = traitUp;
             TraitDown = traitDown;
+            State = true;
 
         }
         
@@ -34,10 +30,11 @@ namespace PersonalityQuiz
                 new QuestionModel("I tend to go with my gut",       1, 2),
                 new QuestionModel("I keep to keep my options open", 1, 0),
                 new QuestionModel("I always look out for myself first",0, 3 ),
-   
+
             };
 
         }
+
 
         public static IList<QuestionModel> All { get; private set; }
     }

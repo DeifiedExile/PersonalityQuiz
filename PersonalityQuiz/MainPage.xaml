@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:personalityQuiz="clr-namespace:PersonalityQuiz;assembly=PersonalityQuiz"
-             xmlns:swiper="clr-namespace:Swiper;assembly=PersonalityQuiz"
+         
              mc:Ignorable="d"
              x:Class="PersonalityQuiz.MainPage">
 
@@ -21,6 +21,39 @@
 
     <ContentPage.Content>
         <StackLayout>
+
+            <ListView IsVisible="{Binding IsResult, Converter={StaticResource not}}" x:Name="QuestionList" ItemsSource="{Binding Questions}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout VerticalOptions="Center">
+                                <StackLayout Orientation="Horizontal" Spacing="1">
+                                    <Label Text="{Binding QText}" HorizontalOptions="StartAndExpand"></Label>
+                                    <Switch IsToggled="{Binding State}"  OnColor="Green" ThumbColor="White"  HorizontalOptions="EndAndExpand"/>
+                                
+                                </StackLayout>
+                                
+                            </StackLayout>
+                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            
+            </ListView>
+            <Label Text="{Binding getprofile}"/>
+            <Button IsVisible="{Binding IsResult, Converter={StaticResource not}}" x:Name="BtnSubmit" Text="Submit" Command="{Binding GetResultsCommand}"/>
+            <ContentView IsVisible="{Binding IsResult}">
+                <StackLayout>
+                    <Image  Source="{Binding Character.ImageUrl}"></Image>
+                    <Label Text="{Binding Character.Name}"></Label>
+                    <Label Text="{Binding Character.Description}"></Label>
+                    <Button Text="Restart" Command="{Binding RestartCommand}"/>
+                </StackLayout>
+            </ContentView>
+        </StackLayout>
+        
+        
+        <!--<StackLayout>
             <ContentView IsVisible="{Binding IsResult, Converter={StaticResource not}}" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                 <ContentView.GestureRecognizers>
                     <SwipeGestureRecognizer Direction="Right" Command="{Binding TrueCommand}"/>
@@ -41,7 +74,8 @@
                     <Button Text="Restart" Command="{Binding RestartCommand}"/>
                 </StackLayout>
             </ContentView>
-        </StackLayout>
+        </StackLayout>-->
+        
 
     </ContentPage.Content>
    

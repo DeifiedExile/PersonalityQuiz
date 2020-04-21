@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalityQuiz.Android", "PersonalityQuiz.Android\PersonalityQuiz.Android.csproj", "{21D96615-3270-40B9-BAA2-63283F4A1D6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalityQuiz", "PersonalityQuiz\PersonalityQuiz.csproj", "{A35AC078-8E7E-42F6-A014-17A6649A5506}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalityQuiz", "PersonalityQuiz\PersonalityQuiz.csproj", "{A35AC078-8E7E-42F6-A014-17A6649A5506}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
