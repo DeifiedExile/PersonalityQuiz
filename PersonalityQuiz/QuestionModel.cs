@@ -23,13 +23,13 @@ namespace PersonalityQuiz
         {
             All = new List<QuestionModel>
             {
-                new QuestionModel("I like to make things",          2, 0 ),
-                new QuestionModel("I like being in control",        2, 1 ),
-                new QuestionModel("I like to be alone",             0, 2),
-                new QuestionModel("I tend to think very logically", 3, 1),
-                new QuestionModel("I tend to go with my gut",       1, 2),
-                new QuestionModel("I keep to keep my options open", 1, 0),
-                new QuestionModel("I always look out for myself first",0, 3 ),
+                new QuestionModel("I like to make things",          3, 2 ),
+                new QuestionModel("I like being in control",        3, 0 ),
+                new QuestionModel("I like to be alone",             2, 3),
+                new QuestionModel("I tend to think very logically", 1, 0),
+                new QuestionModel("I tend to go with my gut",       0, 3),
+                new QuestionModel("I keep to keep my options open", 0, 2),
+                new QuestionModel("I always look out for myself first",3, 2 ),
 
             };
 

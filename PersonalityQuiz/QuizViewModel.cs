@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -24,8 +25,14 @@ namespace PersonalityQuiz
         public QuestionModel CurrentQuestionModel => QuestionModel.All[QuestionID];
         public int CharacterID;
         public ObservableCollection<QuestionModel> QuestionList = new ObservableCollection<QuestionModel>(QuestionModel.All);
+        public CharacterModel Character => Characters.ElementAtOrDefault(CharacterID);
+        public List<CharacterModel> Characters = new List<CharacterModel>();
+        public async void GetCharacters()
+        {
+            Characters = await App.ApiResultManager.GetTasksAsync();
+                 
+        }
 
-        public CharacterModel Character => CharacterModel.All[CharacterID];
         public int[] PersonalityProfile = new int[] { 0, 0, 0, 0 };
         public bool _IsResult = false;
         public string getprofile => PersonalityProfile[0] + " " + PersonalityProfile[1] + " " + PersonalityProfile[2] + " " + PersonalityProfile[3];
@@ -50,6 +57,8 @@ namespace PersonalityQuiz
             RestartCommand = new Command(RestartApp);
             GetResultsCommand = new Command(GetResults);
             ToggleTFCommand = new Command(ToggleTF);
+            
+
 
         }
 
@@ -58,9 +67,10 @@ namespace PersonalityQuiz
             
         }
 
-        void GetResults()
+        async void GetResults()
         {
-            foreach(QuestionModel q in QuestionModel.All)
+            Characters = await App.ApiResultManager.GetTasksAsync();
+            foreach (QuestionModel q in QuestionModel.All)
             {
                 if(q.State)
                 {
